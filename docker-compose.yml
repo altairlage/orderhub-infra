@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  cliente-service:
+    build: ./orderhub-cliente-service/orderhub-cliente-service
+    container_name: cliente-service
+    hostname: cliente-service
+    ports:
+      - "8081:8080"
+    depends_on:
+      - core-builder
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  produto-service:
+    # A propriedade 'image' é opcional se você só for rodar localmente, mas é boa para taguear a imagem.
+    # image: seu-usuario-dockerhub/orderhub-produto-service:latest
+    build:
+      context: ..
+      dockerfile: ../orderhub-produto-service/orderhub-produto-service/Dockerfile
+    container_name: produto-service
+    hostname: produto-service
+    ports:
+      - "8082:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  estoque-service:
+    # image: seu-usuario-dockerhub/orderhub-estoque-service:latest
+    build:
+      context: ..
+      dockerfile: ../orderhub-estoque-service/orderhub-estoque-service
+    container_name: estoque-service
+    hostname: estoque-service
+    ports:
+      - "8083:8080"
+    depends_on:
+      - core-builder
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  pedido-receiver:
+    # image: seu-usuario-dockerhub/orderhub-pedido-receiver:latest
+    build:
+      context: ..
+      dockerfile: ./orderhub-pedido-receiver/orderhub-pedido-receiver
+    container_name: pedido-receiver
+    hostname: pedido-receiver
+    ports:
+      - "8084:8080"
+    depends_on:
+      - core-builder
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  pagamento-service:
+    # image: seu-usuario-dockerhub/orderhub-pagamento-service:latest
+    build: 
+      context: ..
+      dockerfile: ./orderhub-pagamento-service/orderhub-pagamento-service
+    container_name: pagamento-service
+    hostname: pagamento-service
+    ports:
+      - "8085:8080"
+    depends_on:
+      - core-builder
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+networks:
+  default:
+    name: orderhub-network
