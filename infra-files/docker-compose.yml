@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  pedido-receiver:
+    image: teamorderhub/orderhub-pedido-receiver:${IMAGE_TAG:-latest}
+    build:
+      context: ..
+      dockerfile: ./orderhub-pedido-receiver/orderhub-pedido-receiver
+    container_name: pedido-receiver
+    hostname: pedido-receiver
+    ports:
+      - "8080:8080"
+    depends_on:
+      - core-builder
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  pedido-service:
+    image: teamorderhub/orderhub-pedido-service:${IMAGE_TAG:-latest}
+    build:
+      context: ..
+      dockerfile: ./orderhub-pedido-receiver/orderhub-pedido-service
+    container_name: pedido-service
+    hostname: pedido-service
+    ports:
+      - "8081:8080"
+    depends_on:
+      - core-builder
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  cliente-service:
+    image: teamorderhub/orderhub-cliente-service:${IMAGE_TAG:-latest}
+    build:
+      context: ..
+      dockerfile: ../orderhub-cliente-service/orderhub-cliente-service/Dockerfile
+    container_name: cliente-service
+    hostname: cliente-service
+    ports:
+      - "8082:8080"
+    depends_on:
+      - core-builder
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  produto-service:
+    image: teamorderhub/orderhub-produto-service:${IMAGE_TAG:-latest}
+    build:
+      context: ..
+      dockerfile: ../orderhub-produto-service/orderhub-produto-service/Dockerfile
+    container_name: produto-service
+    hostname: produto-service
+    ports:
+      - "8083:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  estoque-service:
+    image: teamorderhub/orderhub-estoque-service:${IMAGE_TAG:-latest}
+    build:
+      context: ..
+      dockerfile: ../orderhub-estoque-service/orderhub-estoque-service
+    container_name: estoque-service
+    hostname: estoque-service
+    ports:
+      - "8084:8080"
+    depends_on:
+      - core-builder
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  pagamento-service:
+    image: teamorderhub/orderhub-pagamento-service:${IMAGE_TAG:-latest}
+    build: 
+      context: ..
+      dockerfile: ./orderhub-pagamento-service/orderhub-pagamento-service
+    container_name: pagamento-service
+    hostname: pagamento-service
+    ports:
+      - "8085:8080"
+    depends_on:
+      - core-builder
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+networks:
+  default:
+    name: orderhub-network

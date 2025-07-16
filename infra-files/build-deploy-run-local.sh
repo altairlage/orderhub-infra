@@ -1,7 +1,6 @@
 #!/bin/bash
 
 echo "Baixando os demais repositorios..."
-
 git clone https://github.com/altairlage/orderhub-core.git ../orderhub-core
 
 git clone https://github.com/altairlage/orderhub-cliente-service.git ../orderhub-cliente-service
@@ -14,7 +13,14 @@ git clone https://github.com/altairlage/orderhub-pedido-receiver.git ../orderhub
 
 git clone https://github.com/altairlage/orderhub-pagamento-service.git ../orderhub-pagamento-service
 
-echo "Compilando os serviços com docker e rodando com docker-compose..."
+echo "*** Autenticando no Docker Hub..."
+docker login -u "teamorderhub" -p "orderhub@1234"
 
-# Build and run the services:
-docker-compose up --build
+echo "*** Construindo as imagens..."
+docker-compose build
+
+echo "*** Enviando as imagens para o Docker Hub..."
+docker-compose push
+
+echo "*** Iniciando os serviços..."
+docker-compose up -d
