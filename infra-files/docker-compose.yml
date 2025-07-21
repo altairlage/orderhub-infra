@@ -5,7 +5,7 @@ services:
     image: teamorderhub/orderhub-pedido-receiver:${IMAGE_TAG:-latest}
     build:
       context: ..
-      dockerfile: ./orderhub-pedido-receiver/orderhub-pedido-receiver
+      dockerfile: ./orderhub-pedido-receiver/orderhub-pedido-receiver/Dockerfile
     container_name: pedido-receiver
     hostname: pedido-receiver
     ports:
@@ -19,7 +19,7 @@ services:
     image: teamorderhub/orderhub-pedido-service:${IMAGE_TAG:-latest}
     build:
       context: ..
-      dockerfile: ./orderhub-pedido-receiver/orderhub-pedido-service
+      dockerfile: ./orderhub-pedido-receiver/orderhub-pedido-service/Dockerfile
     container_name: pedido-service
     hostname: pedido-service
     ports:
@@ -59,7 +59,7 @@ services:
     image: teamorderhub/orderhub-estoque-service:${IMAGE_TAG:-latest}
     build:
       context: ..
-      dockerfile: ../orderhub-estoque-service/orderhub-estoque-service
+      dockerfile: ../orderhub-estoque-service/orderhub-estoque-service/Dockerfile
     container_name: estoque-service
     hostname: estoque-service
     ports:
@@ -73,7 +73,7 @@ services:
     image: teamorderhub/orderhub-pagamento-service:${IMAGE_TAG:-latest}
     build: 
       context: ..
-      dockerfile: ./orderhub-pagamento-service/orderhub-pagamento-service
+      dockerfile: ./orderhub-pagamento-service/orderhub-pagamento-service/Dockerfile
     container_name: pagamento-service
     hostname: pagamento-service
     ports:
