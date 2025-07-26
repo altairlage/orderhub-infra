@@ -1,17 +1,28 @@
-version: '3.8'
-
 services:
+  orderhub-rabbitmq:
+    image: rabbitmq:3-management
+    container_name: orderhub-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ./definitions.json:/etc/rabbitmq/definitions.json:ro
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+
   pedido-receiver:
     image: teamorderhub/orderhub-pedido-receiver:${IMAGE_TAG:-latest}
     build:
       context: ..
-      dockerfile: ./orderhub-pedido-receiver/orderhub-pedido-receiver
+      dockerfile: ./orderhub-pedido-receiver/orderhub-pedido-receiver/Dockerfile
     container_name: pedido-receiver
     hostname: pedido-receiver
     ports:
       - "8080:8080"
     depends_on:
-      - core-builder
+      - orderhub-rabbitmq
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
@@ -24,8 +35,6 @@ services:
     hostname: pedido-service
     ports:
       - "8081:8080"
-    depends_on:
-      - core-builder
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
@@ -38,8 +47,6 @@ services:
     hostname: cliente-service
     ports:
       - "8082:8080"
-    depends_on:
-      - core-builder
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
@@ -64,22 +71,18 @@ services:
     hostname: estoque-service
     ports:
       - "8084:8080"
-    depends_on:
-      - core-builder
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
   pagamento-service:
     image: teamorderhub/orderhub-pagamento-service:${IMAGE_TAG:-latest}
-    build: 
+    build:
       context: ..
       dockerfile: ./orderhub-pagamento-service/orderhub-pagamento-service
     container_name: pagamento-service
     hostname: pagamento-service
     ports:
       - "8085:8080"
-    depends_on:
-      - core-builder
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
