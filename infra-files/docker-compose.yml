@@ -20,7 +20,7 @@ services:
     container_name: pedido-receiver
     hostname: pedido-receiver
     ports:
-      - "8080:8080"
+      - "8086:8080"
     depends_on:
       - orderhub-rabbitmq
     environment:
