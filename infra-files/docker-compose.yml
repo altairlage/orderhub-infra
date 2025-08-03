@@ -30,7 +30,7 @@ services:
     image: teamorderhub/orderhub-pedido-service:${IMAGE_TAG:-latest}
     build:
       context: ..
-      dockerfile: ./orderhub-pedido-receiver/orderhub-pedido-service
+      dockerfile: ./orderhub-pedido-service/orderhub-pedido-service
     container_name: pedido-service
     hostname: pedido-service
     ports:
