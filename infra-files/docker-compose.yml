@@ -16,7 +16,7 @@ services:
     image: teamorderhub/orderhub-pedido-receiver:${IMAGE_TAG:-latest}
     build:
       context: ..
-      dockerfile: ./orderhub-pedido-receiver/orderhub-pedido-receiver/Dockerfile
+      dockerfile: ../orderhub-infra/orderhub-pedido-receiver/orderhub-pedido-receiver/Dockerfile
     container_name: pedido-receiver
     hostname: pedido-receiver
     ports:
@@ -30,11 +30,13 @@ services:
     image: teamorderhub/orderhub-pedido-service:${IMAGE_TAG:-latest}
     build:
       context: ..
-      dockerfile: ./orderhub-pedido-receiver/orderhub-pedido-service
+      dockerfile: ../orderhub-infra/orderhub-pedido-service/orderhub-pedido-service/Dockerfile
     container_name: pedido-service
     hostname: pedido-service
     ports:
       - "8081:8080"
+    depends_on:
+      - orderhub-rabbitmq
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
@@ -42,7 +44,7 @@ services:
     image: teamorderhub/orderhub-cliente-service:${IMAGE_TAG:-latest}
     build:
       context: ..
-      dockerfile: ../orderhub-cliente-service/orderhub-cliente-service/Dockerfile
+      dockerfile: ../orderhub-infra/orderhub-cliente-service/orderhub-cliente-service/Dockerfile
     container_name: cliente-service
     hostname: cliente-service
     ports:
@@ -54,7 +56,7 @@ services:
     image: teamorderhub/orderhub-produto-service:${IMAGE_TAG:-latest}
     build:
       context: ..
-      dockerfile: ../orderhub-produto-service/orderhub-produto-service/Dockerfile
+      dockerfile: ../orderhub-infra/orderhub-produto-service/orderhub-produto-service/Dockerfile
     container_name: produto-service
     hostname: produto-service
     ports:
@@ -66,7 +68,7 @@ services:
     image: teamorderhub/orderhub-estoque-service:${IMAGE_TAG:-latest}
     build:
       context: ..
-      dockerfile: ../orderhub-estoque-service/orderhub-estoque-service
+      dockerfile: ../orderhub-infra/orderhub-estoque-service/orderhub-estoque-service
     container_name: estoque-service
     hostname: estoque-service
     ports:
@@ -78,7 +80,7 @@ services:
     image: teamorderhub/orderhub-pagamento-service:${IMAGE_TAG:-latest}
     build:
       context: ..
-      dockerfile: ./orderhub-pagamento-service/orderhub-pagamento-service
+      dockerfile: ../orderhub-infra/orderhub-pagamento-service/orderhub-pagamento-service/Dockerfile
     container_name: pagamento-service
     hostname: pagamento-service
     ports:
