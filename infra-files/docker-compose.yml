@@ -68,11 +68,11 @@ services:
     image: teamorderhub/orderhub-estoque-service:${IMAGE_TAG:-latest}
     build:
       context: ..
-      dockerfile: ../orderhub-infra/orderhub-estoque-service/orderhub-estoque-service
+      dockerfile: ../orderhub-infra/orderhub-estoque-service/orderhub-estoque-service/Dockerfile
     container_name: estoque-service
     hostname: estoque-service
     ports:
-      - "8084:8080"
+      - "8084:8081"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
