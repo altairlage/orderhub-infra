@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e9bfc13e-6cd0-4be1-a720-599217032a3c",
+		"_postman_id": "b1d0dc1a-6c1f-4f50-8e0f-11c9c9fac033",
 		"name": "OrderHub",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30226124"
+		"_exporter_id": "8464153"
 	},
 	"item": [
 		{
@@ -394,7 +394,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8085/pagamentos/1",
+							"raw": "http://localhost:8085/pagamentos/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -402,7 +402,27 @@
 							"port": "8085",
 							"path": [
 								"pagamentos",
-								"1"
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obter Ordem de pagamento Por Id Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/pagamentos/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"pagamentos",
+								"5"
 							]
 						}
 					},
@@ -446,7 +466,7 @@
 			"name": "pedido-receiver",
 			"item": [
 				{
-					"name": "Pedido Receiver",
+					"name": "Produzir Pedido na FIla",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -487,8 +507,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8084/estoques/1",
-							"protocol": "http",
+							"raw": "localhost:8084/estoques/1",
 							"host": [
 								"localhost"
 							],
@@ -496,6 +515,26 @@
 							"path": [
 								"estoques",
 								"1"
+							]
+						},
+						"description": "Busca a quantidade em estoque de um item específico pelo seu ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Estoque por ID de Produto Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8084/estoques/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"estoques",
+								"2"
 							]
 						},
 						"description": "Busca a quantidade em estoque de um item específico pelo seu ID."
@@ -610,6 +649,49 @@
 								"estoques",
 								"11",
 								"remover"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pedido-service",
+			"item": [
+				{
+					"name": "Obter Pedido Por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/pedidos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obter Pedido Por Id Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/pedidos/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"pedidos",
+								"2"
 							]
 						}
 					},
