@@ -72,7 +72,7 @@ services:
     container_name: estoque-service
     hostname: estoque-service
     ports:
-      - "8084:8081"
+      - "8084:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
