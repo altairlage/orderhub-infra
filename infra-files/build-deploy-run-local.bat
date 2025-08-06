@@ -12,6 +12,8 @@ git clone https://github.com/altairlage/orderhub-pedido-receiver.git ../orderhub
 
 git clone https://github.com/altairlage/orderhub-pagamento-service.git ../orderhub-pagamento-service
 
+git clone https://github.com/altairlage/orderhub-pedido-service.git ../orderhub-pedido-service
+
 echo "Compilando os serviços com docker e rodando com docker-compose..."
 
 echo "*** Autenticando no Docker Hub..."

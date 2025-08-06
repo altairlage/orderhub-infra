@@ -13,6 +13,8 @@ git clone https://github.com/altairlage/orderhub-pedido-receiver.git ../orderhub
 
 git clone https://github.com/altairlage/orderhub-pagamento-service.git ../orderhub-pagamento-service
 
+git clone https://github.com/altairlage/orderhub-pedido-service.git ../orderhub-pedido-service
+
 echo "*** Autenticando no Docker Hub..."
 docker login -u "teamorderhub" -p "orderhub@1234"
 
